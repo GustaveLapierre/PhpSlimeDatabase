@@ -1,0 +1,18 @@
+@keyframes color-change {
+    0% {
+        background-color: red;
+    }
+    50% {
+        background-color: #f700ff;
+    }
+    100% {
+        background-color: #006280;
+    }
+}
+
+h1 {
+    animation: color-change 10s infinite;
+    color: white;
+    text-align: center;
+    padding: 10px;
+}

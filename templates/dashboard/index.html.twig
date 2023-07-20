@@ -1,0 +1,49 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" type="text/css" href="{{ asset('styles.css') }}">
+{% endblock %}
+
+{% block title %}High Score Dashboard{% endblock %}
+
+{% block body %}
+    <h1>High Score Dashboard</h1>
+
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        <div class="alert alert-danger">
+            {{ message }}
+        </div>
+    {% endfor %}
+
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Username</th>
+            <th>Timer</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for high_score in high_scores %}
+            <tr>
+                <td>{{ high_score.username }}</td>
+                <td>{{ high_score.timer }}</td>
+                <td>
+                    <a href="{{ path('delete_dashboard_high_scores', {username: high_score.username}) }}" class="btn btn-danger">Delete</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">No high scores found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

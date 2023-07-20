@@ -1,0 +1,46 @@
+<?php
+
+namespace App\Entity;
+use App\Repository\HighScoreRepository;
+use Doctrine\ORM\Mapping as ORM;
+
+#[ORM\Entity(repositoryClass: HighScoreRepository::class)]
+class HighScore
+{
+    #[ORM\Id]
+    #[ORM\GeneratedValue]
+    #[ORM\Column(type: 'integer')]
+    private $id;
+
+    #[ORM\Column(type: 'string', length: 512)]
+    private $username;
+
+    #[ORM\Column(type: 'float')]
+    private $timer;
+
+    public function getId(): ?int
+    {
+        return $this->id;
+    }
+
+    public function getUsername(): ?string
+    {
+        return $this->username;
+    }
+    public function getTimer(): ?float
+    {
+        return $this->timer;
+    }
+    public function setUsername(string $username): self
+    {
+        $this->username = $username;
+        return $this;
+    }
+
+    public function setTimer(float $timer): self
+    {
+        $this->timer = $timer;
+        return $this;
+    }
+
+}
