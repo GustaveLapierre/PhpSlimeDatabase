@@ -15,6 +15,9 @@ class HighScore
     #[ORM\Column(type: 'string', length: 512)]
     private $username;
 
+    #[ORM\Column(type: 'string', length: 512, nullable: false, options: ["default" => "easy"])]
+    private $gamemode;
+
     #[ORM\Column(type: 'float')]
     private $timer;
 
@@ -27,6 +30,11 @@ class HighScore
     {
         return $this->username;
     }
+
+    public function getGamemode(): ?string
+    {
+        return $this->gamemode;
+    }
     public function getTimer(): ?float
     {
         return $this->timer;
@@ -34,6 +42,12 @@ class HighScore
     public function setUsername(string $username): self
     {
         $this->username = $username;
+        return $this;
+    }
+
+    public function setGamemode(string $gamemode): self
+    {
+        $this->gamemode = $gamemode;
         return $this;
     }
 

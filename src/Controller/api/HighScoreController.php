@@ -29,15 +29,18 @@ class HighScoreController extends AbstractController
         $data = json_decode($request->getContent(), true);
         $username = $data["username"];
         $timer = $data["timer"];
+        $gamemode = $data["gamemode"];
 
-        $highScore = $this->highScoreManager->isExistUsername($username) ?
-            $this->highScoreManager->getHighScoreByUsername($username) : new HighScore();
+        $highScore = $this->highScoreManager->isExistGamemode($gamemode, $username)
+            ? $this->highScoreManager->getHighScoreByUsername($username, $gamemode)
+            : new HighScore();
 
 
-        if (!$this->highScoreManager->isExistUsername($username) ||
-            $this->highScoreManager->isBetterTime($username, $timer)) {
+        if (!$this->highScoreManager->isExistGamemode($gamemode, $username) ||
+            $this->highScoreManager->isBetterTime($username, $timer, $gamemode)) {
             $highScore->setUsername($username);
             $highScore->setTimer($timer);
+            $highScore->SetGamemode($gamemode);
             $em->persist($highScore);
             $em->flush();
         }

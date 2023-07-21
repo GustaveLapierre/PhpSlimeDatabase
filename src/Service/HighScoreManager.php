@@ -20,9 +20,18 @@ class HighScoreManager
         return $user !== null;
     }
 
-    public function isBetterTime(string $username, float $newTime): bool
+    public function isExistGamemode(string $gamemode, string $username): bool
     {
-        $highScore = $this->highScoreRepository->findOneByUsername($username);
+        $highScore = $this->highScoreRepository->findOneBy(['username'=> $username, 'gamemode'=> $gamemode]);
+        return $highScore !== null;
+    }
+
+    public function isBetterTime(string $username, float $newTime, string $gamemode): bool
+    {
+        $highScore = $this->highScoreRepository->findOneBy([
+            'username' => $username,
+            'gamemode' => $gamemode
+        ]);
 
         if ($highScore === null) {
             return false;
@@ -31,9 +40,13 @@ class HighScoreManager
         return $newTime > $highScore->getTimer();
     }
 
-    public function getHighScoreByUsername(string $username): HighScore
+    public function getHighScoreByUsername(string $username, string $gamemode): HighScore
     {
-        return $this->highScoreRepository->findOneBy(['username' => $username]);
+        $highScore = $this->highScoreRepository->findOneBy([
+            'username' => $username,
+            'gamemode' => $gamemode
+        ]);
+        return $highScore;
     }
 
 

@@ -26,6 +26,7 @@
         <tr>
             <th>Username</th>
             <th>Timer</th>
+            <th>GameMode</th>
             <th>Actions</th>
         </tr>
         </thead>
@@ -34,6 +35,7 @@
             <tr>
                 <td>{{ high_score.username }}</td>
                 <td>{{ high_score.timer }}</td>
+                <td>{{ high_score.gamemode }}</td>
                 <td>
                     <a href="{{ path('delete_dashboard_high_scores', {username: high_score.username}) }}" class="btn btn-danger">Delete</a>
                 </td>
