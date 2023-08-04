@@ -34,10 +34,10 @@ class HighScoreController extends AbstractController
         ]);
     }
 
-    #[Route('/dashboard/delete/{username}', name: 'delete_dashboard_high_scores', methods: 'GET')]
-    public function delete(string $username, HighScoreRepository $highScoreRepository, EntityManagerInterface $em): Response
+    #[Route('/dashboard/delete/{username}/{gamemode}', name: 'delete_dashboard_high_scores', methods: 'GET')]
+    public function delete(string $username, string $gamemode, HighScoreRepository $highScoreRepository, EntityManagerInterface $em): Response
     {
-        $highScores = $highScoreRepository->findBy(['username' => $username]);
+        $highScores = $highScoreRepository->findBy(['username' => $username, 'gamemode' => $gamemode]);
 
         if (!$highScores) {
             // Add flash message

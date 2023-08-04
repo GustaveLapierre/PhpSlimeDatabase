@@ -3,6 +3,9 @@
 namespace App\Entity;
 use App\Repository\HighScoreRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 #[ORM\Entity(repositoryClass: HighScoreRepository::class)]
 class HighScore
@@ -12,30 +15,33 @@ class HighScore
     #[ORM\Column(type: 'integer')]
     private $id;
 
-    #[ORM\Column(type: 'string', length: 512)]
-    private $username;
+    #[ORM\Column(type: 'string', length: 512, nullable: false, options: ["default" => "Anne Onyme"])]
+    #[Assert\NotBlank]
+    private string $username;
 
     #[ORM\Column(type: 'string', length: 512, nullable: false, options: ["default" => "easy"])]
-    private $gamemode;
+    #[Assert\NotBlank]
+    private string $gamemode;
 
     #[ORM\Column(type: 'float')]
-    private $timer;
+    #[Assert\NotBlank]
+    private float $timer;
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string
     {
         return $this->username;
     }
 
-    public function getGamemode(): ?string
+    public function getGamemode(): string
     {
         return $this->gamemode;
     }
-    public function getTimer(): ?float
+    public function getTimer(): float
     {
         return $this->timer;
     }
@@ -56,5 +62,6 @@ class HighScore
         $this->timer = $timer;
         return $this;
     }
+
 
 }

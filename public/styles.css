@@ -1,3 +1,5 @@
+/* Your existing styles here */
+
 @keyframes color-change {
     0% {
         background-color: red;
@@ -10,9 +12,58 @@
     }
 }
 
+@keyframes color-change-dark {
+    0% {
+        background-color: #660000;
+    }
+    50% {
+        background-color: #530053;
+    }
+    100% {
+        background-color: #003344;
+    }
+}
+
 h1 {
     animation: color-change 10s infinite;
     color: white;
     text-align: center;
     padding: 10px;
+}
+
+body.dark-mode h1 {
+    animation-name: color-change-dark;
+}
+
+/* Define light theme colors */
+:root {
+    --bg-color: white;
+    --text-color: black;
+    --alert-success: lightgreen;
+    --alert-error: #f8d7da;
+    --table-color: #f2f2f2;
+}
+
+/* Define dark theme colors */
+body.dark-mode {
+    --bg-color: #333;
+    --text-color: white;
+    --alert-success: green;
+    --alert-error: red;
+    --table-color: #555;
+}
+
+/* Use CSS variables */
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+.alert-success {
+    background-color: var(--alert-success);
+}
+.alert-danger {
+    background-color: var(--alert-error);
+}
+.table {
+    background-color: var(--table-color);
 }
